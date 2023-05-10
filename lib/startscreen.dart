@@ -9,6 +9,7 @@ class StartScreen extends StatelessWidget {
       //margin: const EdgeInsets.only(left: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        //mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Image.asset(
               "assets/images/quiz-logo.png",

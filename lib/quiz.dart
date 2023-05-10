@@ -39,7 +39,7 @@ class _QuizState extends State<Quiz> {
       debugShowCheckedModeBanner: false,
       title: "Real Quiz App",
       home: Scaffold(
-        backgroundColor: Colors.brown,
+        backgroundColor: const Color.fromARGB(240, 240, 240, 240),
         body: currentScreen == "start-screen"
             ? StartScreen(_switchScreen)
             : const QuestionsScreen(),
