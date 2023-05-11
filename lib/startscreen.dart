@@ -37,7 +37,7 @@ class StartScreen extends StatelessWidget {
             icon: const Icon(
               Icons.start_sharp,
               color: Colors.black,
-              size: 35,
+              size: 40,
             ),
             label: Text('Start Quiz',
                 style: GoogleFonts.changa(
