@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_quiz_app/data/questions-data.dart';
 import 'package:real_quiz_app/questions_screen.dart';
+import 'package:real_quiz_app/result_screen.dart';
 import 'package:real_quiz_app/startscreen.dart';
 
 class Quiz extends StatefulWidget {
@@ -19,9 +20,10 @@ class _QuizState extends State<Quiz> {
   void _answersChosen(String answer){
     selectedAnswers.add(answer);
     if(selectedAnswers.length == questions.length){
+      _calcResults();
       setState(() {
-        selectedAnswers.clear();
-        currentScreen = "start-screen";
+        //selectedAnswers.clear();
+        currentScreen = "result-screen";
       });
     }
   }
@@ -33,9 +35,14 @@ class _QuizState extends State<Quiz> {
         totalScore ++;
       }
     }
-
   }
-
+  void _resetQuiz(){
+    setState(() {
+      selectedAnswers.clear();
+      totalScore = 0;
+      currentScreen = 'questions-screen';
+    });
+  }
   /*@override
   void initState() {
     // TODO: implement initState
@@ -55,15 +62,16 @@ class _QuizState extends State<Quiz> {
     if(currentScreen == 'questions-screen'){
       activeScreen = QuestionsScreen(onSelectAnswer: _answersChosen);
     }
+    else if(currentScreen == 'result-screen'){
+      activeScreen = ResultWidget(totalScore: totalScore, selectedAnswers: selectedAnswers, quizRestart: _resetQuiz);
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Real Quiz App",
       home: Scaffold(
         backgroundColor: const Color.fromARGB(240, 240, 240, 240),
-        body: currentScreen == "start-screen"
-            ? StartScreen(_switchScreen)
-            : QuestionsScreen(onSelectAnswer: _answersChosen),
+        body: activeScreen,
       ),
     );
   }

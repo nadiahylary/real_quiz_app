@@ -22,12 +22,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
       questionIndex++;
     });
   }
-  void _resetQuiz(){
-
-    setState(() {
-      questionIndex = 0;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,64 +31,44 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     return SizedBox(
       width: double.infinity,
        child: Center(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(
-                  questions[questionIndex].question,
-                  style: GoogleFonts.changa(
-                    textStyle: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                    questions[questionIndex].question,
+                    style: GoogleFonts.changa(
+                      textStyle: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              ...(questions[questionIndex].getShuffledAnswers()).map((answer) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    AnswerWidget(answerText: answer, onTap:() {
-                      _quiz(answer);
-                    }
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                  ],
-                );
-              }).toList(),
-            ],
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                ...(questions[questionIndex].getShuffledAnswers()).map((answer) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      AnswerWidget(answerText: answer, onTap:() {
+                        _quiz(answer);
+                      }
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  );
+                }).toList(),
+              ],
+            )
           )
-        /*: ElevatedButton(
-            onPressed: _resetQuiz,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.redAccent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40)
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-            ),
-          child: Text(
-            "You completed the Quiz!\n See your results",
-            style: GoogleFonts.genos(
-              textStyle: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            textAlign: TextAlign.center,
-          )
-        ),*/
        )
-      )
     );
   }
 }
