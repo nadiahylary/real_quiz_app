@@ -1,10 +1,13 @@
 import 'dart:math';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:real_quiz_app/data/questions-data.dart';
 import 'package:flutter/material.dart';
 import 'package:real_quiz_app/answer.dart';
+import 'package:real_quiz_app/quiz.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({Key? key}) : super(key: key);
+  const QuestionsScreen({required this.onSelectAnswer, Key? key}) : super(key: key);
+  final void Function(String answer) onSelectAnswer;
 
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
@@ -13,13 +16,14 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
 
   var questionIndex = 0;
-  void _quiz(){
-    //int rand = Random().nextInt(questions.length);
+  void _quiz(String selectedAnswer){
+    widget.onSelectAnswer(selectedAnswer);
     setState(() {
       questionIndex++;
     });
   }
   void _resetQuiz(){
+
     setState(() {
       questionIndex = 0;
     });
@@ -32,38 +36,45 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     child: Column(...));*/
     return SizedBox(
       width: double.infinity,
-      child: Center(
-        child: questionIndex < questions.length ? Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 60),
-              child: Text(
+       child: Center(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text(
                   questions[questionIndex].question,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  )
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            ...(questions[questionIndex].answers).map((answer) {
-              return Column(
-                children: [
-                  AnswerWidget(answerText: answer, onTap: _quiz),
-                  const SizedBox(
-                    height: 15,
+                  style: GoogleFonts.changa(
+                    textStyle: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
-                ],
-              );
-            }).toList(),
-          ],
-        )
-        : ElevatedButton(
-          onPressed: _resetQuiz,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              ...(questions[questionIndex].getShuffledAnswers()).map((answer) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    AnswerWidget(answerText: answer, onTap:() {
+                      _quiz(answer);
+                    }
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                  ],
+                );
+              }).toList(),
+            ],
+          )
+        /*: ElevatedButton(
+            onPressed: _resetQuiz,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
               shape: RoundedRectangleBorder(
@@ -71,13 +82,18 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               ),
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
             ),
-          child: const Text(
-            "Your Results are Good!\n Restart Quiz",
-            style: TextStyle(
-              fontSize: 18,
+          child: Text(
+            "You completed the Quiz!\n See your results",
+            style: GoogleFonts.genos(
+              textStyle: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
+              ),
             ),
+            textAlign: TextAlign.center,
           )
-        ),
+        ),*/
+       )
       )
     );
   }

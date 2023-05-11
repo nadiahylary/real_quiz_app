@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen(this.startQuiz, {Key? key}) : super(key: key);
   final void Function() startQuiz;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -12,21 +14,21 @@ class StartScreen extends StatelessWidget {
         //mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Image.asset(
-              "assets/images/quiz-logo.png",
-              width: 350,
-              color: const Color.fromARGB(90, 255, 255, 255),
+            "assets/images/quiz-logo.png",
+            width: 350,
+            color: const Color.fromARGB(130, 255, 255, 255),
           ),
           const SizedBox(
-            height: 35,
+            height: 20,
           ),
-          const Text(
-            "Learn Flutter th fun way!",
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
-          ),
+          Text("Learn Flutter the fun way!",
+              style: GoogleFonts.blackOpsOne(
+                textStyle: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              )),
           const SizedBox(
             height: 10,
           ),
@@ -34,13 +36,18 @@ class StartScreen extends StatelessWidget {
             onPressed: startQuiz,
             icon: const Icon(
               Icons.start_sharp,
-              color: Colors.white,
+              color: Colors.black,
               size: 35,
             ),
-            label: const Text(
-                'Start Quiz',
-                style: TextStyle(fontSize: 20, color: Colors.redAccent),
-              ),
+            label: Text('Start Quiz',
+                style: GoogleFonts.changa(
+                  textStyle: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.w600
+                  ),
+                )
+            ),
           )
         ],
       ),

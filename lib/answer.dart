@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AnswerWidget extends StatelessWidget {
   const AnswerWidget({required this.answerText, required this.onTap, Key? key}) : super(key: key);
@@ -14,14 +15,17 @@ class AnswerWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40)
         ),
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       ),
       child: Text(answerText,
-          style: const TextStyle(
-            fontSize: 17,
-            //fontWeight: FontWeight.w500,
-            color: Colors.white,
-          )
+          style: GoogleFonts.ubuntu(
+              textStyle: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              )
+          ),
+        textAlign: TextAlign.center,
       ),
     );
   }
